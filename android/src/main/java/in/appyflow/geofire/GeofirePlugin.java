@@ -65,7 +65,10 @@ public class GeofirePlugin implements FlutterPlugin,MethodCallHandler, EventChan
 
             databaseReference = FirebaseDatabase.getInstance().getReference(call.argument("path").toString());
             geoFire = new GeoFire(databaseReference);
-
+  if (geoQuery != null) {
+            geoQuery.removeAllListeners();
+            geoQuery = null;
+        }
             if (geoFire.getDatabaseReference() != null) {
                 result.success(true);
             } else
